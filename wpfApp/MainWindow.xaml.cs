@@ -31,7 +31,7 @@ namespace wpfApp
     public class VMDeamonProcess : INotifyPropertyChanged
     {
 
-        const string PROC_FILE = @"C:\Users\koki\source\repos\kokivanov\IMFsendHelpPls\deamon\bin\Debug\net6.0\deamon.exe"; // Bind to textbox like selecting file
+        const string PROC_FILE = @"C\Users\dodiy\source\repos\projectred\redMachine\bin\Debg\net6.0-windows\redmachine.exe"; // Bind to textbox like selecting file
 
 
         private Process redMachine;
