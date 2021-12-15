@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "wpfApp", "wpfApp\wpfApp.csproj", "{185344EB-50E7-4B96-ABA6-FD75AE0198CD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "redMachine", "redMachine\redMachine.csproj", "{E0AC29E1-509B-400D-A09C-C7A8D8444954}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{185344EB-50E7-4B96-ABA6-FD75AE0198CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{185344EB-50E7-4B96-ABA6-FD75AE0198CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{185344EB-50E7-4B96-ABA6-FD75AE0198CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{185344EB-50E7-4B96-ABA6-FD75AE0198CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0AC29E1-509B-400D-A09C-C7A8D8444954}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0AC29E1-509B-400D-A09C-C7A8D8444954}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0AC29E1-509B-400D-A09C-C7A8D8444954}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0AC29E1-509B-400D-A09C-C7A8D8444954}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C3D3F3FD-97E2-4887-8E1C-DAA99A34D88D}
+	EndGlobalSection
+EndGlobal
