@@ -457,3 +457,8 @@ namespace wpfApp
         private Polyline chartPolyline;
    
 }
+
+
+
+
+

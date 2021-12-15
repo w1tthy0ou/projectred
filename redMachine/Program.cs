@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Text;
 
-namespace deamon {
-    class deamonapp {
+namespace redMachine {
+    class redMachineApp {
 
         static string filePath;
         static string searchedWord;
