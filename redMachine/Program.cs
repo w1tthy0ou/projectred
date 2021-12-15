@@ -1,9 +1,15 @@
-﻿using System.IO.MemoryMappedFiles;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.IO.MemoryMappedFiles;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
-namespace redMachine {
-    class redMachineApp {
+namespace redMachine
+{
+    class redMachineApp
+    {
 
         static string filePath;
         static string searchedWord;
@@ -40,14 +46,14 @@ namespace redMachine {
                         int c = 0;
                         var a = binReader.ReadBytes((int)stream.Length);
                         List<byte> b = new List<byte>();
-                        foreach (var d in a) 
+                        foreach (var d in a)
                         {
                             if (c > 3)
                                 break;
 
-                             if (d == (byte)'\0')
-                                    c++;
-                            else 
+                            if (d == (byte)'\0')
+                                c++;
+                            else
                             {
                                 c = 0;
                                 b.Add(d);
@@ -60,7 +66,8 @@ namespace redMachine {
             }
         }
 
-        public static void WriteStatusAndProgress() { // Writes progress and amount of words found to mmf
+        public static void WriteStatusAndProgress()
+        { // Writes progress and amount of words found to mmf
             mutex.WaitOne();
             //Console.WriteLine($"Setting {progress} {found}");
 
@@ -70,7 +77,7 @@ namespace redMachine {
                 foundAccessor.WriteArray<byte>(0, b, 0, b.Length);
             }
             else
-            { 
+            {
                 termination = true;
             }
 
@@ -97,15 +104,16 @@ namespace redMachine {
             mutex.ReleaseMutex();
         }
 
-        private static Int64 _getCurrentTime() 
+        private static Int64 _getCurrentTime()
         {
             return DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
         }
 
-        public static void Seek(string[] src, string t) { // Searching word method
+        public static void Seek(string[] src, string t)
+        { // Searching word method
             t = t.ToLower();
-                        
-            for(Int64 i = 0; i < src.Length; i++) 
+
+            for (Int64 i = 0; i < src.Length; i++)
             {
                 if (src[i].Count() < 1)
                     continue;
@@ -113,7 +121,7 @@ namespace redMachine {
                 while ((lj = src[i].ToLower().IndexOf(t, lj + 1)) != -1)
                     indexes.Add(new Tuple<Int64, int>(i, lj));
 
-                progress = (int)(Math.Floor(((double)i +1)/ (double)src.Length * 100.0));
+                progress = (int)(Math.Floor(((double)i + 1) / (double)src.Length * 100.0));
 
                 //Console.WriteLine(progress);
 
@@ -137,7 +145,9 @@ namespace redMachine {
             Console.WriteLine($"{proccessID}, {beginLine}, {endLine}");
 
             // mmfs for status and amount of words found
+
             foundGate = MemoryMappedFile.OpenExisting(proccessID + "FoundMMF");
+
             foundAccessor = foundGate.CreateViewAccessor();
             progressGate = MemoryMappedFile.OpenExisting(proccessID + "ProgressMMF");
             progressAccessor = progressGate.CreateViewAccessor();

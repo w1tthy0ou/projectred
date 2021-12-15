@@ -31,7 +31,7 @@ namespace wpfApp
     public class VMredMachineProcess : INotifyPropertyChanged
     {
 
-        const string PROC_FILE = @"C\Users\dodiy\source\repos\projectred\redMachine\bin\Debg\net6.0-windows\redmachine.exe"; // Bind to textbox like selecting file
+        const string PROC_FILE = @"C:\Users\dodiy\Documents\wpfApp\wpfApp\redMachine\bin\Debug\net5.0\redMachine.exe"; // Bind to textbox like selecting file
 
 
         private Process redMachine;
@@ -47,7 +47,9 @@ namespace wpfApp
 
         private Mutex _mutex;
 
+
         public VMredMachineProcess(int pn, Int64 sp, Int64 ep)
+
         {
             _processName = pn;
 
@@ -69,7 +71,7 @@ namespace wpfApp
 
             redMachine.StartInfo.FileName = PROC_FILE;
             redMachine.StartInfo.Arguments = $"{pn} {sp} {ep}";
-            redMachine.Start();
+            redMachine?.Start();
         }
 
         ~VMredMachineProcess()

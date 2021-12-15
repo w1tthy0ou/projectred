@@ -6,9 +6,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="820">
-    <Grid x:Name="WN" Background="#FF1D1D1D">
+    <Grid x:Name="WN">
+        <Grid.Background>
+            <ImageBrush ImageSource="/151571-sinij-osvetitelnaya_armatura-lampa_nakalivaniya-svet-chelovek-1920x1080.jpg"/>
+        </Grid.Background>
 
-        <DataGrid secondaryNamespace:Name="Datagrid" HorizontalAlignment="Center" Height="181" Margin="0,16,0,0" VerticalAlignment="Top" Width="616" AutoGenerateColumns="false" ItemsSource="{Binding VMDeamons}">
+        <DataGrid secondaryNamespace:Name="Datagrid" HorizontalAlignment="Center" Height="181" Margin="0,16,0,0" VerticalAlignment="Top" Width="600" AutoGenerateColumns="false" ItemsSource="{Binding VMredMachines}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Ім'я процесу:" Binding="{Binding ProcessName}"/>
                 <DataGridTextColumn Header="Хід процесу:" Binding="{Binding Progress, StringFormat=\{0\}%}"/>
@@ -19,14 +22,13 @@
                 <DataGridTextColumn Header="Витрачений час:" Binding="{Binding SpentTime, StringFormat=\{0\}ms}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <ProgressBar secondaryNamespace:Name="ProgressBarKek" HorizontalAlignment="Left" Height="22" Margin="403,399,0,0" VerticalAlignment="Top" Width="407" Cursor="Arrow" MouseDoubleClick="ProgressBarKek_MouseDoubleClick" Value="{Binding OverallProgress}" Foreground="#FF29A036" Orientation="Horizontal" SmallChange="1" Background="{secondaryNamespace:Null}"/>
+        <ProgressBar secondaryNamespace:Name="ProgressBarKek" HorizontalAlignment="Left" Height="22" Margin="592,388,0,0" VerticalAlignment="Top" Width="199" Cursor="Arrow" MouseDoubleClick="ProgressBarKek_MouseDoubleClick" Value="{Binding OverallProgress}" Foreground="#FF29A036" Orientation="Horizontal" SmallChange="1" Background="{secondaryNamespace:Null}"/>
         <Button secondaryNamespace:Name="StartButton" Content="🔍" HorizontalAlignment="Left" Height="25" Margin="275,301,0,0" VerticalAlignment="Top" Width="31" Click="StartButton_Click"/>
-        <TextBox secondaryNamespace:Name="PathTextBox" HorizontalAlignment="Left" Height="25" Margin="42,240,0,0" TextWrapping="Wrap" Text="{Binding FilePathTextBox}" VerticalAlignment="Top" Width="228" IsEnabled="{Binding FilePathTextBoxIsUnlocked}"/>
+        <TextBox secondaryNamespace:Name="PathTextBox" HorizontalAlignment="Left" Height="25" Margin="42,240,0,0" TextWrapping="Wrap" Text="{Binding FilePathTextBox}" VerticalAlignment="Top" Width="228" IsEnabled="{Binding FilePathTextBoxIsUnlocked}" Background="White"/>
         <Button secondaryNamespace:Name="ChooseFileButton_Copy" Content="..." HorizontalAlignment="Left" Margin="275,240,0,0" VerticalAlignment="Top" Width="31" Click="ChooseFileButton_Copy_Click" Height="25"/>
-        <Image Margin="10,10,746,376" Source="/Image1.png" Stretch="Fill" RenderTransformOrigin="0.127,0.115"/>
         <Label Content="Виберіть потрібний файл:" HorizontalAlignment="Left" Height="35" Margin="42,215,0,0" VerticalAlignment="Top" Width="159" Foreground="#FFF7F6F6"/>
-        <Label Content="Progress:" HorizontalAlignment="Left" Height="28" Margin="335,396,0,0" VerticalAlignment="Top" Width="60" Foreground="#FFFBF6F6"/>
-        <Label Content="Знайти у файлі:" HorizontalAlignment="Left" Height="36" Margin="42,276,0,0" VerticalAlignment="Top" Width="112" Background="#FF1D1D1D" Foreground="#FFF7EBEB" RenderTransformOrigin="0.5,0.5">
+        <Label Content="Прогрес:" HorizontalAlignment="Left" Height="28" Margin="532,385,0,0" VerticalAlignment="Top" Width="60" Foreground="#FFFBF6F6"/>
+        <Label Content="Знайти у файлі:" HorizontalAlignment="Left" Height="36" Margin="42,276,0,0" VerticalAlignment="Top" Width="112" Background="Transparent" Foreground="#FFF7EBEB" RenderTransformOrigin="0.5,0.5">
             <Label.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

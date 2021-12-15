@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="151571-sinij-osvetitelnaya_armatura-lampa_nakalivaniya-svet-chelovek-1920x1080.jpg" />
     <None Remove="giphy.gif" />
     <None Remove="giphy2.gif" />
   </ItemGroup>
@@ -20,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="151571-sinij-osvetitelnaya_armatura-lampa_nakalivaniya-svet-chelovek-1920x1080.jpg" />
     <Resource Include="giphy.gif" />
     <Resource Include="giphy2.gif" />
   </ItemGroup>
