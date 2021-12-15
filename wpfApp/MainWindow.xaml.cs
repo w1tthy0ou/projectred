@@ -28,7 +28,7 @@ namespace wpfApp
 {
 
 
-    public class VMDeamonProcess : INotifyPropertyChanged
+    public class VMredMachineProcess : INotifyPropertyChanged
     {
 
         const string PROC_FILE = @"C\Users\dodiy\source\repos\projectred\redMachine\bin\Debg\net6.0-windows\redmachine.exe"; // Bind to textbox like selecting file
@@ -48,7 +48,7 @@ namespace wpfApp
         private Mutex _mutex;
 
         public VMredMachineProcess(int pn, Int64 sp, Int64 ep)
-        {   
+        {
             _processName = pn;
 
             _foundGate = MemoryMappedFile.CreateNew(pn + "FoundMMF", sizeof(Int64));
@@ -72,7 +72,8 @@ namespace wpfApp
             redMachine.Start();
         }
 
-        ~VMredMachineProcess() {
+        ~VMredMachineProcess()
+        {
             _foundAccessor.Dispose();
             _foundGate.Dispose();
             _mutex.ReleaseMutex();
@@ -84,7 +85,7 @@ namespace wpfApp
         public event PropertyChangedEventHandler? PropertyChanged;
 
         private Int64 _startPoint;
-        public Int64 StartPoint 
+        public Int64 StartPoint
         {
             get { return _startPoint; }
             set { _startPoint = value; OnPropertyChanged("StartPoint"); }
@@ -106,7 +107,7 @@ namespace wpfApp
                 return _progress;
             }
 
-            set 
+            set
             {
                 this._progress = value;
                 OnPropertyChanged("Progress");
@@ -129,14 +130,14 @@ namespace wpfApp
             this.Progress = text1;
             this.Found = text2;
             this.SpentTime = text3;
-            
+
             IsRunning = !redMachine.HasExited;
             return this;
         }
 
         private Int64 _spentTime;
-        public Int64 SpentTime 
-        { 
+        public Int64 SpentTime
+        {
             get => _spentTime;
             set
             {
@@ -146,7 +147,7 @@ namespace wpfApp
         }
 
         private int _processName;
-        public int ProcessName 
+        public int ProcessName
         {
             get { return _processName; }
         }
@@ -155,8 +156,8 @@ namespace wpfApp
         public Int64 Found
         {
             get { return _found; }
-            set 
-            { 
+            set
+            {
                 _found = value;
                 OnPropertyChanged("Found");
             }
@@ -173,7 +174,7 @@ namespace wpfApp
             }
         }
 
-        public void OnPropertyChanged([CallerMemberName]string prop = "")
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
@@ -186,27 +187,30 @@ namespace wpfApp
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     /// 
-    
+
 
     // !TODO: Bind search button availability to IsPathValid parameter
     // !TODO: Remove debbuging label
 
 
-    public class VMMain : INotifyPropertyChanged {
-        public ObservableCollection<VMDeamonProcess> VMDeamons { get; set; }
+    public class VMMain : INotifyPropertyChanged
+    {
+        public ObservableCollection<VMredMachineProcess> VMredMachines { get; set; }
 
         public ObservableCollection<long> TimeSpend { get; set; } // Time spend with each deamon to find word
         public ObservableCollection<Tuple<long, int>> FoundForPeriod { get; set; } // Difference between words found in each time section
-        
+
         public Dictionary<long, int> DiffFound { get; set; }
 
         private bool _isPathValid = false; //!TODO Link to Start button enabled
-        public bool IsPathValid { 
-            get { return _isPathValid; } 
+        public bool IsPathValid
+        {
+            get { return _isPathValid; }
             set { _isPathValid = value; OnPropertyChanged("IsPathValid"); }
         }
 
-        public void UpdateOverall() { // Updates overall progress
+        public void UpdateOverall()
+        { // Updates overall progress
             _overallProgress = 0;
             for (int i = 0; i <= VMredMachines.Count(); i++)
             {
@@ -218,27 +222,27 @@ namespace wpfApp
 
         private int _overallProgress = 0;
         public int OverallProgress
-        { 
+        {
             get { return _overallProgress; }
             set { _overallProgress = value; OnPropertyChanged("OverallProgress"); }
         }
 
-        public VMMain() 
+        public VMMain()
         {
-            
+
             FilePathTextBox = "";
             FilePathTextBoxIsUnlocked = false;
         }
 
         private string _searchedWord;
-        public string SearchedWord 
+        public string SearchedWord
         {
             get { return _searchedWord; }
             set { _searchedWord = value; OnPropertyChanged("SearchedWord"); }
         }
 
         private string _dbginfo;
-        public string DBGInfo 
+        public string DBGInfo
         {
             get { return _dbginfo; }
             set { _dbginfo = value; OnPropertyChanged("DBGInfo"); }
@@ -282,8 +286,8 @@ namespace wpfApp
 
         private async Task UpdateThread()
         {
-            while (!isDone()) 
-            { 
+            while (!isDone())
+            {
                 await Task.Delay(500);
             }
 
@@ -295,8 +299,8 @@ namespace wpfApp
         private void WhenDone()
         {
             var v = (from c in MainVM.DiffFound
-                    orderby c.Key
-                    select new DataPoint(c.Key, c.Value));
+                     orderby c.Key
+                     select new DataPoint(c.Key, c.Value));
             foreach (var i in v)
                 values.Add(i);
         }
@@ -305,7 +309,7 @@ namespace wpfApp
         {
             MainVM = new VMMain();
             values = new ObservableCollection<DataPoint>();
-            MainVM.VMDeamons = new ObservableCollection<VMDeamonProcess>();
+            MainVM.VMredMachines = new ObservableCollection<VMredMachineProcess>();
             MainVM.TimeSpend = new ObservableCollection<long>();
             MainVM.FoundForPeriod = new ObservableCollection<Tuple<long, int>>();
             MainVM.DiffFound = new Dictionary<long, int>();
@@ -316,7 +320,8 @@ namespace wpfApp
 
         }
 
-        ~MainWindow() {
+        ~MainWindow()
+        {
             _filePathMMF.Dispose();
             _filePathMMFaccessor.Dispose();
             _serchedwordMMF.Dispose();
@@ -328,10 +333,11 @@ namespace wpfApp
             StartSearch();
         }
 
-        private bool isDone() { // Checks is all proccesses finished work
+        private bool isDone()
+        { // Checks is all proccesses finished work
             bool d = true;
             MainVM.OverallProgress = 0;
-            for (int i = 0; i < MainVM.VMredMachines.Count(); i++) 
+            for (int i = 0; i < MainVM.VMredMachines.Count(); i++)
             {
                 var oldProgress = MainVM.VMredMachines[i].Progress;
                 MainVM.VMredMachines[i].Update();
@@ -375,16 +381,17 @@ namespace wpfApp
 
                 result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
             }
-            else 
+            else
             {
                 MainVM.IsPathValid = true;
             }
-            
+
         }
 
-        private async void StartSearch() { // Called when Start button pressed
+        private async void StartSearch()
+        { // Called when Start button pressed
             if (!MainVM.IsPathValid || String.IsNullOrWhiteSpace(MainVM.SearchedWord)) // Validates file path
-            { 
+            {
                 MessageBox.Show("Пустое поле не может быть элементом поиска", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
@@ -393,7 +400,7 @@ namespace wpfApp
             _filePathMMF = MemoryMappedFile.CreateOrOpen("FilePathMMF", buff1.Length);
             _filePathMMFaccessor = _filePathMMF.CreateViewAccessor();
 
-            var buff2 = Encoding.Default.GetBytes(MainVM.SearchedWord); 
+            var buff2 = Encoding.Default.GetBytes(MainVM.SearchedWord);
             _serchedwordMMF = MemoryMappedFile.CreateOrOpen("SearchedWordMMF", buff2.Length);
             _serchedwordMMFaccessor = _serchedwordMMF.CreateViewAccessor();
 
@@ -418,7 +425,7 @@ namespace wpfApp
 
             if (step == fc)
             {
-                MainVM.VMredMachines.Add(new VMDeamonProcess(0, 0, fc));
+                MainVM.VMredMachines.Add(new VMredMachineProcess(0, 0, fc));
                 await UpdateThread();
                 return;
             }
@@ -428,16 +435,16 @@ namespace wpfApp
             for (; sp + step < fc;)
             {
                 MainVM.TimeSpend.Add(0);
-                MainVM.VMredMachines.Add(new VMDeamonProcess(Index, sp, sp += step));
+                MainVM.VMredMachines.Add(new VMredMachineProcess(Index, sp, sp += step));
                 Index++;
             }
 
             await UpdateThread();
         }
 
-        public void Terminate() 
+        public void Terminate()
         {
-            MainVM.VMDeamons.Clear();
+            MainVM.VMredMachines.Clear();
             GC.ReRegisterForFinalize(_filePathMMF);
             GC.ReRegisterForFinalize(_filePathMMFaccessor);
             GC.ReRegisterForFinalize(_serchedwordMMF);
@@ -455,7 +462,8 @@ namespace wpfApp
         private Line xAxisLine, yAxisLine;
         private double xAxisStart = 0, yAxisStart = 0, interval = 25;
         private Polyline chartPolyline;
-   
+
+    }
 }
 
 

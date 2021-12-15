@@ -8,26 +8,35 @@
         Title="MainWindow" Height="450" Width="820">
     <Grid x:Name="WN" Background="#FF1D1D1D">
 
-        <DataGrid secondaryNamespace:Name="Datagrid" HorizontalAlignment="Left" Height="368" Margin="335,16,0,0" VerticalAlignment="Top" Width="475" AutoGenerateColumns="false" ItemsSource="{Binding VMDeamons}">
+        <DataGrid secondaryNamespace:Name="Datagrid" HorizontalAlignment="Center" Height="181" Margin="0,16,0,0" VerticalAlignment="Top" Width="616" AutoGenerateColumns="false" ItemsSource="{Binding VMDeamons}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Process name" Binding="{Binding ProcessName}"/>
-                <DataGridTextColumn Header="Proces progress" Binding="{Binding Progress, StringFormat=\{0\}%}"/>
-                <DataGridTextColumn Header="Is active" Binding="{Binding IsRunning}"/>
-                <DataGridTextColumn Header="Found" Binding="{Binding Found}"/>
-                <DataGridTextColumn Header="Start point" Binding="{Binding StartPoint, StringFormat=\{0\}}"/>
-                <DataGridTextColumn Header="End point" Binding="{Binding EndPoint, StringFormat=\{0\}}"/>
-                <DataGridTextColumn Header="Spent time" Binding="{Binding SpentTime, StringFormat=\{0\}ms}"/>
+                <DataGridTextColumn Header="Ім'я процесу:" Binding="{Binding ProcessName}"/>
+                <DataGridTextColumn Header="Хід процесу:" Binding="{Binding Progress, StringFormat=\{0\}%}"/>
+                <DataGridTextColumn Header="Є активним:" Binding="{Binding IsRunning}"/>
+                <DataGridTextColumn Header="Знайдено:" Binding="{Binding Found}"/>
+                <DataGridTextColumn Header="Початкова точка:" Binding="{Binding StartPoint, StringFormat=\{0\}}"/>
+                <DataGridTextColumn Header="Кінцева точка:" Binding="{Binding EndPoint, StringFormat=\{0\}}"/>
+                <DataGridTextColumn Header="Витрачений час:" Binding="{Binding SpentTime, StringFormat=\{0\}ms}"/>
             </DataGrid.Columns>
         </DataGrid>
         <ProgressBar secondaryNamespace:Name="ProgressBarKek" HorizontalAlignment="Left" Height="22" Margin="403,399,0,0" VerticalAlignment="Top" Width="407" Cursor="Arrow" MouseDoubleClick="ProgressBarKek_MouseDoubleClick" Value="{Binding OverallProgress}" Foreground="#FF29A036" Orientation="Horizontal" SmallChange="1" Background="{secondaryNamespace:Null}"/>
-        <Button secondaryNamespace:Name="StartButton" Content="🔍" HorizontalAlignment="Left" Height="23" Margin="274,164,0,0" VerticalAlignment="Top" Width="31" Click="StartButton_Click"/>
-        <TextBox secondaryNamespace:Name="PathTextBox" HorizontalAlignment="Left" Height="20" Margin="30,103,0,0" TextWrapping="Wrap" Text="{Binding FilePathTextBox}" VerticalAlignment="Top" Width="228" IsEnabled="{Binding FilePathTextBoxIsUnlocked}" Grid.ColumnSpan="3"/>
-        <Button secondaryNamespace:Name="ChooseFileButton_Copy" Content="..." HorizontalAlignment="Left" Margin="274,103,0,0" VerticalAlignment="Top" Width="31" Click="ChooseFileButton_Copy_Click" Height="20"/>
+        <Button secondaryNamespace:Name="StartButton" Content="🔍" HorizontalAlignment="Left" Height="25" Margin="275,301,0,0" VerticalAlignment="Top" Width="31" Click="StartButton_Click"/>
+        <TextBox secondaryNamespace:Name="PathTextBox" HorizontalAlignment="Left" Height="25" Margin="42,240,0,0" TextWrapping="Wrap" Text="{Binding FilePathTextBox}" VerticalAlignment="Top" Width="228" IsEnabled="{Binding FilePathTextBoxIsUnlocked}"/>
+        <Button secondaryNamespace:Name="ChooseFileButton_Copy" Content="..." HorizontalAlignment="Left" Margin="275,240,0,0" VerticalAlignment="Top" Width="31" Click="ChooseFileButton_Copy_Click" Height="25"/>
         <Image Margin="10,10,746,376" Source="/Image1.png" Stretch="Fill" RenderTransformOrigin="0.127,0.115"/>
-        <Label Content="Choose Your File:" HorizontalAlignment="Left" Height="24" Margin="10,74,0,0" VerticalAlignment="Top" Width="100" Foreground="#FFF7F6F6" Grid.ColumnSpan="2"/>
+        <Label Content="Виберіть потрібний файл:" HorizontalAlignment="Left" Height="35" Margin="42,215,0,0" VerticalAlignment="Top" Width="159" Foreground="#FFF7F6F6"/>
         <Label Content="Progress:" HorizontalAlignment="Left" Height="28" Margin="335,396,0,0" VerticalAlignment="Top" Width="60" Foreground="#FFFBF6F6"/>
-        <Label Content="Find in The file:" HorizontalAlignment="Left" Height="23" Margin="21,136,0,0" VerticalAlignment="Top" Width="89" Background="#FF1D1D1D" Foreground="#FFF7EBEB" Grid.ColumnSpan="2"/>
-        <TextBox secondaryNamespace:Name="SearchWordTextBox" Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="23" Margin="30,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="224" Text="{Binding SearchedWord}"/>
+        <Label Content="Знайти у файлі:" HorizontalAlignment="Left" Height="36" Margin="42,276,0,0" VerticalAlignment="Top" Width="112" Background="#FF1D1D1D" Foreground="#FFF7EBEB" RenderTransformOrigin="0.5,0.5">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="0"/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="0"/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <TextBox secondaryNamespace:Name="SearchWordTextBox" HorizontalAlignment="Left" Height="25" Margin="42,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="228" Text="{Binding SearchedWord}"/>
         <Label secondaryNamespace:Name="label" Grid.Column="1" Content="{Binding DBGInfo}" HorizontalAlignment="Left" Margin="64,250,0,0" VerticalAlignment="Top" Foreground="White" Height="10" Width="10"/>
     </Grid>
 </Window>
