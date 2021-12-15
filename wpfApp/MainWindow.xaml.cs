@@ -28,7 +28,7 @@ namespace wpfApp
 {
 
 
-    public class VMDeamonProcess : INotifyPropertyChanged
+    public class VMredMachineProcess : INotifyPropertyChanged
     {
 
         const string PROC_FILE = @"C\Users\dodiy\source\repos\projectred\redMachine\bin\Debg\net6.0-windows\redmachine.exe"; // Bind to textbox like selecting file
