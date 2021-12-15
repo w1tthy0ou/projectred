@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="giphy.gif" />
+    <None Remove="giphy2.gif" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Highsoft.Highcharts" Version="9.2.2.2" />
+    <PackageReference Include="OxyPlot.Core" Version="2.1.0" />
+    <PackageReference Include="SciChart" Version="6.5.0.13720" />
+    <PackageReference Include="ScottPlot.WPF" Version="4.1.27" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="giphy.gif" />
+    <Resource Include="giphy2.gif" />
+  </ItemGroup>
+
+</Project>
